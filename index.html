@@ -8,13 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
+    <script src="./forecast.js" defer></script>
 </head>
 
 <body>
 <div class="card">
     <div class="search">
-        <input type="text" class="search-bar" placeholder="Search">
+        <input type="search" id="userinput" class="search-bar" placeholder="Search">
         <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
                      width="1.5em" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -23,15 +23,17 @@
         </svg></button>
     </div>
     <div class="weather loading">
-        <h2 class="city">Weather in Denver</h2>
-        <h1 class="temp">51°C</h1>
-        <div class="flex">
-            <img src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon" />
-            <div class="description">Cloudy</div>
-        </div>
-        <div class="humidity">Humidity: 60%</div>
-        <div class="wind">Wind speed: 6.2 km/h</div>
+        <div id="city">City: </div>
+        <div id="temp">Temperature: </div>
+
+        <div id="humidity">Humidity: </div>
+        <div id="wind">Wind speed: </div>
+        <div id="weather">Weather: </div>
     </div>
+</div>
+<div id="speed">
+    <img  id="icon" />
+    <div class="description"> </div>
 </div>
 </body>
 
