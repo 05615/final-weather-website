@@ -1,55 +1,60 @@
-let weather = {
-    apiKey: "dbe735587bad3551fa97c03750d20f1c",
-    getWeather: function (city) {
+    function getWeather (city){
+        let apistring = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + "dbe735587bad3551fa97c03750d20f1c";
+        console.log(apistring);
+
         fetch(
-            "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + this.apiKey
+            "https://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=dbe735587bad3551fa97c03750d20f1c"
+            //"https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + "dbe735587bad3551fa97c03750d20f1c"
         )
             .then((response) => {
-            if (!response.ok) {
-            alert("No weather found.");
-            throw new Error("No weather found.");
-        }
-        return response;
-    })
-    .then((data) => this.displayWeather(data)){
-            function () {
-                
-            }
-        }
-    }
-    displayWeather: function (data) {
-        const { name } = data;
-        const { icon, description } = data.weather[0];
-        const { temp, humidity } = data.main;
-        const { speed } = data.wind;
-        document.querySelector(".city").innerText = "Weather in " + name;
-        document.querySelector(".icon").src =
-            "https://openweathermap.org/img/wn/" + icon + ".png";
-        document.querySelector(".description").innerText = description;
-        document.querySelector(".temp").innerText = temp + "°C";
-        document.querySelector(".humidity").innerText =
-            "Humidity: " + humidity + "%";
-        document.querySelector(".wind").innerText =
-            "Wind speed: " + speed + " km/h";
-        document.querySelector(".weather").classList.remove("loading");
-        document.body.style.backgroundImage =
-            "url('https://source.unsplash.com/1600x900/?" + name + "')";
-    }
-    search: function () {
-        this.getWeather(document.querySelector(".search-bar").value);
-    }
-};
+                if (!response.ok) {
+                    alert("No weather found.");
+                    throw new Error("No weather found.");
+                }
+                return response.json();
+            }) .then((data)=>{
+                console.log(data);
 
-document.querySelector(".search button").addEventListener("click", function () {
-    weather.search();
-});
+        });
 
-document
-    .querySelector(".search-bar")
-    .addEventListener("keyup", function (event) {
-        if (event.key == "Enter") {
-            weather.search();
+
+
+        function displayWeather(data) {
+            const city = data["name"];
+            // const {icon, description} = data[0];
+            const icon = data["weather"]["icon"];
+            console.log(icon);
+            const speed = data["wind"]["speed"];
+            document.getElementById("city").innerText = "Weather in " + name;
+            document.getElementById("icon").src =
+                "https://openweathermap.org/img/wn/" + icon + ".png";
+            document.getElementById("description").innerText = description;
+            document.getElementById("temp").innerText = temp + "°C";
+            document.getElementById("humidity").innerText =
+                "Humidity: " + humidity + "%";
+            document.getElementById("wind").innerText =
+                "Wind speed: " + speed + " km/h";
+            document.getElementById("weather").classList.remove("loading");
+            document.body.style.backgroundImage =
+                "url('https://source.unsplash.com/1600x900/?" + name + "')";
         }
-    });
 
-weather.getWeather("Farnborough");
+        function search() {
+            this.getWeather(document.querySelector(".search-bar")).value;
+        }
+
+        //search bar
+        document.getElementById("userinput").addEventListener("enter", function () {
+            getWeather(document.getElementById("userinput").value);
+        });
+
+        document
+            .querySelector(".search-bar")
+            .addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    getWeather(document.getElementById("userinput")).value;
+                }
+            });
+
+
+    }
