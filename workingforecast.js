@@ -42,20 +42,25 @@ class storeweather{
             let milliseconds = unixTimestamp * 1000
             let dateObject = new Date(milliseconds)
             let humanDateFormat = dateObject.toLocaleString();//10:30:15
-            console.log(dateObject.toLocaleString("en-US", {hour: "numeric"})); // 10 AM)
+            console.log(dateObject.toLocaleString("en-US", {hour: "numeric"})); // 10 AM
             console.log(dateObject.toLocaleString("en-US", {minute: "numeric"})); // 30
             console.log(dateObject.toLocaleString("en-US", {second: "numeric"})); // 15
             let unixTimestamp2 = sunset;
             let milliseconds2 = unixTimestamp2 * 1000;
             let dateObject2 = new Date(milliseconds2);
             let humanDateFormat2 = dateObject2.toLocaleString();
-            console.log(dateObject2.toLocaleString("en-US", {hour: "numeric"})); // 10 AM)
+            console.log(dateObject2.toLocaleString("en-US", {hour: "numeric"})); // 10 AM
             console.log(dateObject2.toLocaleString("en-US", {minute: "numeric"})); // 30
             console.log(dateObject2.toLocaleString("en-US", {second: "numeric"})); // 15
             let w1 = new storeweather(name,coordlat,coordlon,temperature,actualtemp,humidity,tempmin,tempmax,weather,description,icon,wind,sunrise,sunset,humanDateFormat,humanDateFormat2)
             console.log(w1);
             let div = document.getElementById("ApiData");
-            div.innerHTML = w1.name
+            div.innerHTML = " "
+            div.innerHTML += [w1.name, w1.coordlat, w1.coordlon, w1.actualtemp, w1.description, w1.humanDateFormat, w1.humanDateFormat2, w1.humidity, w1.icon, w1.sunrise, w1.sunset, w1.temperature, w1.tempmax, w1.tempmin, w1.weather, w1.wind, w1.icon,];
+            function opacityChange() {
+                document.getElementById("body")[0].style.opacity = "0.2";
+            }
+
         });
 
         }
@@ -65,8 +70,5 @@ class storeweather{
         console.log(location);
         displayWeather(location);
 
-
     }
-
-
 
