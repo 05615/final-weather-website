@@ -9,12 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <script type="text/javascript" src=http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js> </script>
     <script src="./forecast.js" defer></script>
 </head>
 
 <body>
+<div class="weather-container">
+    <img class="icon">
+    <p class="weather"></p>
+    <p class="temp"></p>
+</div>
 <div class="card">
-    <input type="search" id="userinput" class="search-bar" placeholder="Search" onsearch="search()" onclick= "opacityChange()">
+    <input type="search" id="userinput" class="search-bar" placeholder="Search" onsearch="search()">
     <button><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
                  width="1.5em" xmlns="http://www.w3.org/2000/svg">
 
@@ -38,7 +44,7 @@
 
 <div id="ApiData"></div>
 
-
+<div class="pano-image"></div>
 
 </body>
 
