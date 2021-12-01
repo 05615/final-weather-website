@@ -10,6 +10,27 @@ body {
     font-size: 120%;
 }
 
+.weather-container{
+    border: none;
+    outline: none;
+    border-radius: 24px;
+    background: #7c7c7c2b;
+    color: white;
+    font-family: inherit;
+    font-size: 105%;
+}
+
+.weather{
+    font-size: 22px;
+    margin: 0;
+}
+
+.temp{
+    font-size: 60px;
+    margin: 0;
+    font-weight: bold;
+}
+
 .card {
     background: #000000d0;
     color: white;
@@ -82,3 +103,8 @@ h1.temp {
     position: absolute;
     top: 0;
     left: 20px;
+
+.pano-image {
+    width: 100%;
+    height: 600px;
+}
