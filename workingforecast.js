@@ -56,20 +56,23 @@ function displayWeather(input) {
         let w1 = new storeweather(name,coordlat,coordlon,temperature,actualtemp,humidity,tempmin,tempmax,weather,description,icon,wind,sunrise,sunset,humanDateFormat,humanDateFormat2)
         console.log(w1);
         let div = document.getElementById("ApiData");
-       // div.innerHTML = " ";
-       // div.innerHTML += [w1.name, w1.coordlat, w1.coordlon, w1.actualtemp, w1.description, w1.humanDateFormat, w1.humanDateFormat2, w1.humidity, w1.icon, w1.sunrise, w1.sunset, w1.temperature, w1.tempmax, w1.tempmin, w1.weather, w1.wind, w1.icon,];
+        div.innerHTML = " ";
+        // div.innerHTML += [w1.name, w1.coordlat, w1.coordlon, w1.actualtemp, w1.description, w1.humanDateFormat, w1.humanDateFormat2, w1.humidity, w1.icon, w1.sunrise, w1.sunset, w1.temperature, w1.tempmax, w1.tempmin, w1.weather, w1.wind, w1.icon,];
 
         $.getJSON("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&appid=dbe735587bad3551fa97c03750d20f1c", function (data){
             console.log(data)
 
+            var name = data.name;
             var icon =  "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
             var temp = Math.floor(data.main.temp) + "°C";
             var weather = data.weather[0].main;
+            var humidity = data.main.humidity + "% Humidity";
 
-
+            $('.name').append(name);
             $('.icon').attr('src',icon);
             $('.weather').append(weather);
             $('.temp').append(temp);
+            $('.humidity').append(humidity);
         });
 
     });
@@ -81,6 +84,3 @@ function search() {
     console.log(location);
     displayWeather(location);
 }
-
-const panoImage = document.querySelector('.pano-image');
-const panoCity = 'https://unsplash.com/images/stock/hdr';
