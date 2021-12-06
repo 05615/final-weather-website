@@ -40,8 +40,8 @@ function displayWeather(input) {
         let sunrise = (response["sys"]["sunrise"]);
         let sunset = (response["sys"]["sunset"]);
         let unixTimestamp = sunrise;
-        let milliseconds = unixTimestamp * 1000
-        let dateObject = new Date(milliseconds)
+        let milliseconds = unixTimestamp * 1000;
+        let dateObject = new Date(milliseconds);
         let humanDateFormat = dateObject.toLocaleString();//10:30:15
         console.log(dateObject.toLocaleString("en-US", {hour: "numeric"})); // 10 AM
         console.log(dateObject.toLocaleString("en-US", {minute: "numeric"})); // 30
@@ -83,4 +83,17 @@ function search() {
     let location=(document.getElementById("userinput")).value;
     console.log(location);
     displayWeather(location);
+}
+
+//allows for the user to change between celsius and fahrenheit
+function celsiusToFahrenheit(input) {
+    let url = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&appid=dbe735587bad3551fa97c03750d20f1c";
+    fetch(url, {}).then(response => {
+        temperature = (response["main"]["temp"][response * 9 / 5 + 32]["°F"]);
+    })
+}
+
+function setup(){
+    inputButton = createButton('Degree Conversion');
+    inputButton.mousePressed(celsiusToFahrenheit);
 }
