@@ -1,3 +1,7 @@
+let temperature = 0;
+let degreeCount = "°C";
+let celsius = true;
+
 class storeweather{
     constructor(name,coordlat,coordlon,temperature,actualtemp,humidity,tempmin,tempmax,weather,description,icon,wind,sunrise,sunset,humanDateFormat,humanDateFormat2){
         this.name = name;
@@ -28,7 +32,8 @@ function displayWeather(input) {
         let name = (response["name"]);
         let coordlat = (response["coord"]["lat"]);
         let coordlon = (response["coord"]["lon"]);
-        let temperature = (response["main"]["feels_like"]+ "°C");
+        temperature = (response["main"]["feels_like"]);
+        console.log(temperature);
         let actualtemp = (response["main"]["temp"]+ "°C");
         let humidity = (response["main"]["humidity"]+ "%");
         let tempmin = (response["main"]["temp_min"]+ "°C");
@@ -59,20 +64,20 @@ function displayWeather(input) {
         div.innerHTML = " ";
         // div.innerHTML += [w1.name, w1.coordlat, w1.coordlon, w1.actualtemp, w1.description, w1.humanDateFormat, w1.humanDateFormat2, w1.humidity, w1.icon, w1.sunrise, w1.sunset, w1.temperature, w1.tempmax, w1.tempmin, w1.weather, w1.wind, w1.icon,];
 
-        $.getJSON("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&appid=dbe735587bad3551fa97c03750d20f1c", function (data){
+        $.getJSON("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&appid=dbe735587bad3551fa97c03750d20f1c", function (data) {
             console.log(data)
 
-            var name = data.name;
-            var icon =  "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-            var temp = Math.floor(data.main.temp) + "°C";
-            var weather = data.weather[0].main;
-            var humidity = data.main.humidity + "% Humidity";
+           let name = data.name;
+            let icon = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+            let temp = /*Math.floor(data.main.temp)*/  temperature + degreeCount;
+            let weather = data.weather[0].main;
+            let humidity = data.main.humidity + "% Humidity";
 
-            $('.name').append(name);
-            $('.icon').attr('src',icon);
-            $('.weather').append(weather);
-            $('.temp').append(temp);
-            $('.humidity').append(humidity);
+            $('.name').html(name);
+            $('.icon').attr('src', icon);
+            $('.weather').html(weather);
+            $('.temp').html(Math.floor(temperature) + degreeCount);
+            $('.humidity').html(humidity);
         });
 
     });
@@ -85,12 +90,28 @@ function search() {
     displayWeather(location);
 }
 
+
+
 //allows for the user to change between celsius and fahrenheit
-function celsiusToFahrenheit(input) {
-    let url = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&units=metric&appid=dbe735587bad3551fa97c03750d20f1c";
-    fetch(url, {}).then(response => {
-        temperature = (response["main"]["temp"][response * 9 / 5 + 32]["°F"]);
-    })
+function celsiusToFahrenheit() {
+
+    if(degreeCount == "°C") {
+        degreeCount = "°F";
+    } else {
+        degreeCount = "°C";
+    }
+
+    if (celsius == true) {
+        temperature = (temperature * 9 / 5 + 32);
+        console.log(temperature);
+        celsius = false;
+        $('.temp').html(Math.floor(temperature) + degreeCount);
+    } else {
+        temperature = ((temperature -32) * 5/9);
+        console.log(temperature);
+        celsius = true;
+        $('.temp').html(Math.floor(temperature) + degreeCount);
+    }
 }
 
 function setup(){
