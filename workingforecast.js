@@ -72,12 +72,16 @@ function displayWeather(input) {
             let temp = /*Math.floor(data.main.temp)*/  temperature + degreeCount;
             let weather = data.weather[0].main;
             let humidity = data.main.humidity + "% Humidity";
+            let sunrise = humanDateFormat
+            let sunset = humanDateFormat2
 
             $('.name').html(name);
             $('.icon').attr('src', icon);
             $('.weather').html(weather);
             $('.temp').html(Math.floor(temperature) + degreeCount);
             $('.humidity').html(humidity);
+            $('.sunrise').html("Sunrise  " + (dateObject.toLocaleString("en-US", {hour: "numeric"})));
+            $('.sunset').html("Sunset  " + (dateObject2.toLocaleString("en-US", {hour: "numeric"})));
         });
 
     });
@@ -114,7 +118,8 @@ function celsiusToFahrenheit() {
     }
 }
 
-function setup(){
+function setup() {
     inputButton = createButton('Degree Conversion');
     inputButton.mousePressed(celsiusToFahrenheit);
 }
+
